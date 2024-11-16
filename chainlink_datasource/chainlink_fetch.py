@@ -2,10 +2,13 @@
 
 # This script is used to fetch historical price data from the chainlink oracle.
 
+import bz2
 import json
-from shared import DIR_THIS, addrs_chainlink, get_feed, dt2ts
 
-# Chainlink returns the following schema:
+from chainlink_config import DIR_THIS, DATE_TS_END, DATE_TS_START, chainlink_addrs
+from chainlink_utils  import get_assets, get_feed, dt2ts
+
+# ChainLink returns the following schema:
 def _map_data(d):
     return {
              'round_id': d[0],
@@ -16,7 +19,7 @@ def _map_data(d):
      }
 
 
-def get_lastest_round(feed):
+def get_latest_round(feed):
     return _map_data(feed.functions.latestRoundData().call())
 
 
@@ -29,7 +32,7 @@ def fetch_data_by_timestamp_range(feed, ts_start, ts_end):
     def find_valid_lower_bound_round_id():
         """Finds the first valid lower bound using binary search."""
         lower_bound = 1
-        upper_bound = get_lastest_round(feed)['round_id']
+        upper_bound = get_latest_round(feed)['round_id']
 
         while lower_bound < upper_bound:
             mid_round = (lower_bound + upper_bound) // 2
@@ -59,7 +62,7 @@ def fetch_data_by_timestamp_range(feed, ts_start, ts_end):
     def find_round_by_timestamp(target_timestamp, direction, initial_lower_bound):
         """Finds the closest round for a given timestamp using binary search."""
         lower_bound = initial_lower_bound
-        upper_bound = get_lastest_round(feed)['round_id']
+        upper_bound = get_latest_round(feed)['round_id']
         target_round = None
 
         while lower_bound <= upper_bound:
@@ -121,17 +124,17 @@ def fetch_data_by_timestamp_range(feed, ts_start, ts_end):
 
 
 def gen_dataset():
-    # Choose the start and end dates.
-    ts_start = dt2ts("04/11/2024 00:00:00")
-    ts_end = dt2ts("10/11/2024 23:59:59")
+    ts_start = dt2ts(DATE_TS_START)
+    ts_end = dt2ts(DATE_TS_END)
 
-    for asset in addrs_chainlink.keys():
+    for asset in get_assets():
         print(f"Fetching data for {asset} from {ts_start} to {ts_end}.")
         feed = get_feed(asset)
         data = fetch_data_by_timestamp_range(feed, ts_start, ts_end)
         print(data)
-        fnf = f"{DIR_THIS}/data/{asset}.json"
-        json.dump(data, open(fnf, "w"))
+        fnf = f"{DIR_THIS}/data/{asset}.json.bz2"
+        with bz2.open(fnf, "wt") as f:
+            json.dump(data, f)
         print(f"Saved data to json at: {fnf}")
         print("\n\n\n\n\n")
 
