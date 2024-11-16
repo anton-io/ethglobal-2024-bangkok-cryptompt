@@ -5,7 +5,7 @@ import datetime
 
 from chainlink_config import (
     DIR_THIS,
-    web3,
+    w3,
     abi,
     chainlink_addrs
 )
@@ -26,11 +26,11 @@ def get_chainlink_decimals(asset):
 def get_feed(asset, use_ens=False):
     if use_ens:
         ens = chainlink_addrs[asset][0]
-        addr = web3.ens.address(ens)
+        addr = w3.ens.address(ens)
     else:
         # Using Arbitrum Addr by default:
         addr = chainlink_addrs[asset][1]
-    return web3.eth.contract(address=addr, abi=abi)
+    return w3.eth.contract(address=addr, abi=abi)
 
 
 def get_price_ts(asset):

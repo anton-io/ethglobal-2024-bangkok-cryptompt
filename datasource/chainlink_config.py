@@ -13,7 +13,7 @@ DIR_THIS = os.path.abspath(os.path.dirname(__file__))
 
 # Arbitrum:
 WEB3_PROVIDER = 'https://arbitrum.llamarpc.com'
-web3 = Web3(Web3.HTTPProvider(WEB3_PROVIDER))
+w3 = Web3(Web3.HTTPProvider(WEB3_PROVIDER))
 print(f"Web3 provider: {WEB3_PROVIDER}")
 
 # BTC/USD (Ethereum) | btc-usd.data.eth

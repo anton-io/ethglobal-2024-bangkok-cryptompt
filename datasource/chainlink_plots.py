@@ -5,7 +5,8 @@ sns.set_style("dark")
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-from chainlink_utils import get_assets, get_price_ts
+
+from chainlink_utils import DIR_THIS, get_assets, get_price_ts
 
 
 def plot_price_time_series(t_start, ts_prices, name=''):
@@ -27,6 +28,12 @@ def plot_price_time_series(t_start, ts_prices, name=''):
     # Format x-axis for better readability.
     plt.xticks(rotation=45)
     plt.tight_layout()
+
+    # Save output image to figs.
+    fnf_image = f"{DIR_THIS}/figs/plot_{name.lower()}.png"
+    plt.savefig(fnf_image)
+    print(f"Saved correlation image to: {fnf_image}.")
+    plt.show()
 
     # Show the plot.
     plt.show()

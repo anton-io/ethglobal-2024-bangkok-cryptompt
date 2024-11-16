@@ -5,7 +5,7 @@
 import bz2
 import json
 
-from chainlink_config import DIR_THIS, DATE_TS_END, DATE_TS_START, chainlink_addrs
+from chainlink_config import DIR_THIS, DATE_TS_END, DATE_TS_START
 from chainlink_utils  import get_assets, get_feed, dt2ts
 
 

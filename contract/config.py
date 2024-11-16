@@ -6,20 +6,23 @@ import os
 import eth_account
 from web3 import Web3
 
+
 DIR_THIS = os.path.abspath(os.path.dirname(__file__))
 
 CONTRACT="CryptoMPT"
 
 # Target Chain RPC (using Ganache for testing).
-RPC_URL = 'HTTP://127.0.0.1:7545'
-web3 = Web3(Web3.HTTPProvider(RPC_URL))
+# WEB3_PROVIDER = 'HTTP://127.0.0.1:7545'
+WEB3_PROVIDER = 'https://arb1.arbitrum.io/rpc'
+w3 = Web3(Web3.HTTPProvider(WEB3_PROVIDER))
+
 
 # Contract's ABI and BIN.
 CONTRACT_BIN  = f"{DIR_THIS}/src/output/{CONTRACT}.bin"
 CONTRACT_ABI  = f"{DIR_THIS}/src/output/{CONTRACT}.abi"
 
 # Contract's address after it has been deployed:
-CONTRACT_ADDR = f"0x5bAdb2201d409E7887BAF43901ade77b038aba31"
+CONTRACT_ADDR = f"0x18253170C3F5719E621Cc65330135032cBA33632"
 
 # Load private key (stored in .pkey).
 try:
@@ -32,9 +35,13 @@ except Exception as _:
 account = eth_account.Account.from_key(PKEY)
 user_address = account.address
 
+# # For POA
+# from web3.middleware import geth_poa_middleware
+# w3.middleware_onion.inject(geth_poa_middleware, layer=0)
+
 if os.path.exists(CONTRACT_ABI):
     # Contract's ABI.
     contract_abi = open(CONTRACT_ABI, 'r').read()
 
     # Initialize the contract.
-    contract = web3.eth.contract(address=CONTRACT_ADDR, abi=contract_abi)
+    contract = w3.eth.contract(address=CONTRACT_ADDR, abi=contract_abi)
