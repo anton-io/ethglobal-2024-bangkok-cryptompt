@@ -3,5 +3,9 @@
 *.pyc
 __pycache__
 
+# Ignore file containing legacy code.
 _lixo/
+
+# Ignore file containing private key.
+.pkey
 

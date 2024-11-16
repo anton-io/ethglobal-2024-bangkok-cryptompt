@@ -165,6 +165,32 @@ def get_mpt(fnf=FNF_DATA_CSV_BZ2):
     }
 
 
+def get_best_portfolio(mpt):
+    highest_sharpe = mpt['max_sharpe']
+    return_perc = round(highest_sharpe['return_perc'] * 100)
+    assets = {}
+    for name, perc in highest_sharpe['allocations'].items():
+        assets[name] = round(perc * 100)
+    vol_perc  = round(highest_sharpe['volatilty'] * 100)
+    sharpe_ratio = round(highest_sharpe['sharpe_ratio'] * 100)
+
+    print(f'Allocations for best sharpe ratio portfolio:')
+    asorted = sorted([(v,k) for k,v in assets.items()], reverse=True)
+    for alloc, asset in asorted:
+        print(f'{asset.upper():>15s}: {alloc:>5d} %')
+    print(f'Expected return: {return_perc:>5d} %')
+    print(f'     Volatility: {vol_perc:>5d} %')
+    print(f'   Sharpe Ratio: {sharpe_ratio:>5d} %')
+
+    return {
+        'allocations': assets,
+        'returns': return_perc,
+        'sharpe': sharpe_ratio,
+        'volatility': vol_perc,
+    }
+
+
 if __name__ == '__main__':
     mpt = get_mpt()
-    print(mpt)
+    portfolio = get_best_portfolio(mpt)
+    print(portfolio)
