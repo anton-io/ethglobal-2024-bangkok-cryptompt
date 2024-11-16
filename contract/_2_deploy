@@ -14,7 +14,7 @@ def deploy_contract():
     print(f"My address is: {addr_mine}")
 
     # Connect to blockchain RPC.
-    w3 = Web3(Web3.HTTPProvider(RPC_URL))
+    w3 = Web3(Web3.HTTPProvider(WEB3_PROVIDER))
 
     if not w3.is_connected():
         print("Unable to connect to blockchain RPC.")

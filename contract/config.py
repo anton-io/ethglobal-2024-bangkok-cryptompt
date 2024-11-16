@@ -22,7 +22,7 @@ CONTRACT_BIN  = f"{DIR_THIS}/src/output/{CONTRACT}.bin"
 CONTRACT_ABI  = f"{DIR_THIS}/src/output/{CONTRACT}.abi"
 
 # Contract's address after it has been deployed:
-CONTRACT_ADDR = f"0x18253170C3F5719E621Cc65330135032cBA33632"
+CONTRACT_ADDR = f"0xa1AC5bD954aa0857F15287eC67Fee4d5587f6E04"
 
 # Load private key (stored in .pkey).
 try:
