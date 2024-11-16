@@ -21,7 +21,7 @@ CryptoMPT is divided into 3 main sections. On the first one, primarily inside th
 
 
 ![CryptoMPT Explainer](CryptoMPT.webp "CryptoMPT Explainer")
-Fig-1. Fairly accurate AI-Generated Hallucinate of how CryptoMPT works.
+Fig-1. Fairly accurate AI-Generated hallucination of how CryptoMPT works.
 
 
 
