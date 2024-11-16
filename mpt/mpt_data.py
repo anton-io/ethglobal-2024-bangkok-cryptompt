@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
-
+import bz2
 import pandas as pd
 
-from mpt_config import FNF_DATA_CSV
+from mpt_config import FNF_DATA_CSV_BZ2
 
 from chainlink_utils import get_price_ts, get_assets
 
 
-def rdata_to_csv(assets=get_assets(), fnf=FNF_DATA_CSV):
+def rdata_to_csv(assets=get_assets(), fnf=FNF_DATA_CSV_BZ2):
     # Load data.
     data = {}
     for asset in assets:
@@ -32,12 +32,14 @@ def rdata_to_csv(assets=get_assets(), fnf=FNF_DATA_CSV):
             print(f"error: {asset} {i}")
 
     # Write CSV with data ready for pandas.
-    print(f"Writing CSV data to: {FNF_DATA_CSV}")
-    open(fnf, 'w').write(str_data)
+    print(f"Writing CSV data to: {FNF_DATA_CSV_BZ2}")
+    with bz2.open(fnf, "wt") as f:
+        f.write(str_data)
 
 
-def data_load(fnf=FNF_DATA_CSV):
-    return pd.read_csv(fnf)
+def data_load(fnf=FNF_DATA_CSV_BZ2):
+    with bz2.open(fnf) as fd:
+        return pd.read_csv(fd)
 
 
 if __name__ == "__main__":

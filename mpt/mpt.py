@@ -1,16 +1,19 @@
 #!/usr/bin/env python
 
 # Import necessary dependencies.
+import bz2
 import numpy as np
 import pandas as pd
 import scipy.optimize as sco
 import matplotlib.pyplot as plt
 
-from mpt_config import DIR_THIS, FNF_DATA_CSV, risk_free_rate
+from mpt_config import DIR_THIS, FNF_DATA_CSV_BZ2, risk_free_rate
 
 
-def get_mpt(fnf=FNF_DATA_CSV):
-    df = pd.read_csv(fnf)
+def get_mpt(fnf=FNF_DATA_CSV_BZ2):
+    with bz2.open(fnf) as fd:
+        df = pd.read_csv(fd)
+
     # Convert timestamps to a usable time index (optional).
     df['ts'] = pd.to_datetime(df['ts'], unit='s')
     df.set_index('ts', inplace=True)
