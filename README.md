@@ -56,7 +56,7 @@ This project's smart-contract was deployed, and __verified__, in number of chain
   * [Flare](https://flare.network/) Coston2: [0x18253170C3F5719E621Cc65330135032cBA33632](https://coston2-explorer.flare.network/address/0x18253170C3F5719E621Cc65330135032cBA33632?tab=contract)
   * [Base](https://www.base.org/) Sepolia: [0x72aCf8dB0e17D5A4bA9eB8176375D8F06eE3bfd0](https://base-sepolia.blockscout.com/address/0x72aCf8dB0e17D5A4bA9eB8176375D8F06eE3bfd0?tab=contract)
   * [Ethereum](https://www.base.org/) Sepolia: [0xbF31eC2eFBEeC6F5cfdbb3febc703BC1be0A8FE5](https://sepolia.etherscan.io/address/0xbF31eC2eFBEeC6F5cfdbb3febc703BC1be0A8FE5#code)
-* 
+
 
 Since all of these chains are EVM-compatible, deploying the smart contract was seamless and efficient, allowing us to quickly get up and running across all of them.
 
