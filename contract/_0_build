@@ -2,7 +2,7 @@
 
 # Build the docker container that contains contract dependencies and solc.
 #
-# note: For a quick test run: docker run -ti solc /bin/bash
+# note: For a quick test run: docker run -ti --platform=linux/amd64 solc /bin/bash
 
 # Get this file's directory.
 DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

@@ -25,6 +25,7 @@ RUN add-apt-repository ppa:ethereum/ethereum -y && \
 # Install typical contract dependencies.
 RUN npm i -g "@openzeppelin/contracts"
 RUN npm i -g "@flarenetwork/flare-periphery-contracts"
+RUN npm i -g "@chainlink/contracts"
 
 # Allow the selection of the solc version.
 RUN apt-get -y install python3-pip
